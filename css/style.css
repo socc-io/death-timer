@@ -1,0 +1,24 @@
+body{
+	background-color : "#000000";
+	color : "#666666";
+	font-family : WOODCUTTER;
+}
+
+h1{
+	color: #DF0029;
+	font-size: 200px;
+}
+
+select{
+	font-family : WOODCUTTER;
+	color: #DF0029;
+	font-style:bold;
+	font-size: 50px;
+}
+
+button{
+	font-family : WOODCUTTER;
+	color: #DF0029;
+	font-style:bold;
+	font-size: 50px;
+}

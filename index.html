@@ -1,0 +1,74 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Death Timer</title>
+	<link rel="stylesheet" type="text/css" href="css/fonts.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body bgcolor="#000000">
+	<table align="center" width="100%" height="100%"><tr>
+	<td align="center" valign="middle" width="100%" height="100%">
+
+	<h1 name="countdown" id="countdown">Death Time</h1>
+
+	<form name="minuteForm" id="minuteForm">
+		<select name="minuteSelect" id="minuteSelect" 
+			onChange="doMinuteTimer();" title="Select Minute">
+			<option value="OFF" selected>OFF</option>
+		</select>
+		<button onClick="doReset();">RESET</button>
+	</form> 
+
+	<br><br></td></tr></table>
+</body>
+
+<script>
+	function zeroPad(nr,base){
+		var len = (String(base).length - String(nr).length)+1;
+		return len > 0? new Array(len).join('0')+nr : nr;
+	}
+
+	var doReset = function(){
+		minute = 0;
+		second = 0;
+	}
+
+	var doStartTimer = function(){	
+		if(minute == 0 && second == 0){
+			new Audio('mp3/evillaugh.mp3').play()
+			new Audio('mp3/psycoscream.mp3').play()
+			console.log("Death Time");
+			$("#countdown").text("Death Time");
+			return;
+		} else if(second == 0) {
+			minute -=1;
+			second = 59;
+		} else{
+			second -=1;
+		}
+		setTimeout(doStartTimer,1000);
+		console.log(minute+":"+second);
+		$("#countdown").text(zeroPad(minute,10)+":"+zeroPad(second,10));
+	}
+
+	var doMinuteTimer =  function (){
+		countdown = document.forms[0].minuteSelect
+					.options[document.forms[0].minuteSelect.selectedIndex]
+					.text;
+		second = 0;
+		minute = countdown.split(' ')[0];
+		if(minute == 'OFF'){
+			minute = 0; second = 0;
+		}else{
+			setTimeout(doStartTimer,1000);
+		}
+	}
+
+	for (i = 1 ; i < 100 ; i++){
+		$("#minuteSelect").append('<option value="'+i+'">'+i+' Min</option>');
+		if(i>=5) i+=4;
+	}	
+
+</script>
+</HTML>
